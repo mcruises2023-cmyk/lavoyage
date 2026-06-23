@@ -168,6 +168,80 @@
       .mobile-cta{display:flex;position:fixed;z-index:40;left:14px;right:14px;bottom:14px;gap:10px}.mobile-cta .btn{flex:1;padding:14px 12px;font-size:10px}
       footer{padding-bottom:86px}
     }
+
+    /* Mobile overflow hardening */
+    html,body{width:100%;max-width:100%;overflow-x:hidden}
+    .nav__inner,.hero__content,.wrap,.section-head,.story-grid,.cards,.included-grid,.exp-grid,.final-cta,.offer-card,.trust,.journey,.inc,.exp,.manager{min-width:0;max-width:100%}
+    figure{margin:0}
+    h1,h2,h3,h4,p,a,span,strong,b,li{overflow-wrap:break-word}
+    @media (max-width:640px){
+      .nav{padding:12px 14px}
+      .nav__inner{width:100%;min-width:0}
+      .brand{letter-spacing:.16em;font-size:10px;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+      .brand small{letter-spacing:.16em}
+      .nav__links{min-width:0;gap:0}
+      .hero{min-height:auto;display:block}
+      .hero__content{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;width:100%;max-width:100%;padding:104px 14px 72px}
+      .eyebrow{font-size:10px;letter-spacing:.16em;margin-bottom:18px;gap:8px}
+      .eyebrow:before{width:34px}
+      h1{font-size:clamp(38px,12.6vw,48px);line-height:.96;letter-spacing:-.045em;max-width:100%;overflow-wrap:normal;hyphens:auto}
+      .hero__lead{font-size:16px;line-height:1.55;margin-top:20px;max-width:100%}
+      .hero__actions{width:100%;gap:10px;margin-top:28px}
+      .btn{max-width:100%;min-width:0;white-space:normal;text-align:center;line-height:1.25;padding:13px 16px}
+      .hero__actions .btn{width:100%}
+      .hero__trust{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:28px}
+      .trust{border-radius:22px}
+      .trust__media{aspect-ratio:16/9}
+      .trust__copy{padding:14px}
+      .trust__copy strong{font-size:22px}
+      .trust__copy span{font-size:13px}
+      .offer-card{width:100%;max-width:100%;padding:20px;border-radius:24px}
+      .offer-card h2{font-size:29px}
+      .offer-card__grid{grid-template-columns:minmax(0,1fr);gap:10px;margin:18px 0}
+      .mini{padding:13px;border-radius:16px}
+      .mini b{font-size:25px}
+      .scrollhint{display:none}
+      section{padding:64px 14px}
+      .section-head{gap:22px;margin-bottom:30px}
+      h2{font-size:clamp(34px,10.5vw,44px);line-height:1}
+      .section-copy{font-size:16px;line-height:1.62}
+      .story__content{padding:22px}
+      .story h3,.journey h3,.exp h3{font-size:27px}
+      .cards{grid-template-columns:minmax(0,1fr)}
+      .journey__media{aspect-ratio:16/10}
+      .journey__body{padding:18px}
+      .price{align-items:flex-start;flex-wrap:wrap}
+      .price strong{font-size:30px}
+      .journey .btn{width:100%;padding:12px 14px}
+      .filters{gap:8px}
+      .filter{font-size:10px;padding:10px 13px}
+      .included-grid,.exp-grid{grid-template-columns:minmax(0,1fr)}
+      .inc{min-height:auto}
+      .exp{padding:22px;min-height:auto}
+      .final-cta{grid-template-columns:minmax(0,1fr);padding:26px 18px;border-radius:30px 30px 0 0;gap:22px}
+      .final-cta h2{font-size:clamp(32px,9.8vw,42px)}
+      .final-cta p{font-size:15px}
+      .manager{grid-template-columns:64px minmax(0,1fr);padding:12px;border-radius:20px}
+      .manager img{width:64px;height:64px;border-radius:18px}
+      .manager b{font-size:15px}
+      .manager span{font-size:12px}
+    }
+    @media (max-width:380px){
+      .hero__content{padding-left:12px;padding-right:12px}
+      h1{font-size:clamp(36px,12vw,43px);letter-spacing:-.035em}
+      .offer-card h2{font-size:27px}
+      .brand{max-width:190px}
+      .trust__copy strong{font-size:20px}
+      .mini b{font-size:23px}
+    }
+    @media (max-width:340px){
+      h1{font-size:35px}
+      .hero__lead{font-size:15px}
+      .btn{font-size:10px;letter-spacing:.1em}
+      .offer-card{padding:18px}
+      .brand{letter-spacing:.12em;max-width:170px}
+    }
+
   </style>
 </head>
 <body>
@@ -191,7 +265,7 @@
     <div class="hero__content">
       <div>
         <span class="eyebrow reveal">Explora Journeys · Ocean State of Mind</span>
-        <h1 class="reveal">Что, если самый вдохновляющий отель не стоит на месте?</h1>
+        <h1 class="reveal">Что, если лучший отель не стоит на месте?</h1>
         <p class="hero__lead reveal">Explora Journeys открывает новый формат luxury-путешествий: приватный сьют с террасой, продуманная гастрономия, Ocean Wellness и маршруты, в которых каждый рассвет начинается с нового горизонта.</p>
         <div class="hero__actions reveal">
           <a class="btn" href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" rel="noopener">Выбрать круиз</a>
