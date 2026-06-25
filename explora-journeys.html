@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explora Journeys — Роскошные круизы | La Voyage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #112040;
+    --gold: #C9A96E;
+    --gold-light: #E2C88A;
+    --ivory: #F6F1E9;
+    --sea: #8BA8B5;
+    --sea-dark: #4E7A8D;
+    --white: #FFFFFF;
+    --text-dark: #0A1628;
+    --text-mid: #4a5568;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', sans-serif;
+    --font-label: 'Cinzel', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,22,40,0.85) 0%, transparent 100%);
+    backdrop-filter: blur(0px);
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .nav-logo svg { width: 36px; height: 36px; }
+  .nav-logo-text {
+    display: flex; flex-direction: column;
+  }
+  .nav-logo-text span:first-child {
+    font-family: var(--font-label);
+    font-size: 13px; letter-spacing: 0.18em; color: var(--white); line-height: 1;
+  }
+  .nav-logo-text span:last-child {
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.25em; color: var(--gold); line-height: 1.6;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.75);
+    text-decoration: none; text-transform: uppercase; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: var(--font-label);
+    font-size: 11px; letter-spacing: 0.15em;
+    padding: 11px 28px; border: 1px solid var(--gold);
+    color: var(--gold); text-decoration: none; text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    position: relative; width: 100%; height: 100vh; overflow: hidden;
+    display: flex; align-items: flex-end; justify-content: flex-start;
+  }
+  .hero-video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10,22,40,0.72) 0%,
+      rgba(10,22,40,0.35) 50%,
+      rgba(10,22,40,0.55) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 72px 80px;
+    max-width: 720px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.3em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 36px; height: 1px; background: var(--gold);
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(54px, 7vw, 96px);
+    font-weight: 300; line-height: 1.0;
+    color: var(--white); margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-headline em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.2vw, 28px);
+    font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.72); margin-bottom: 42px; line-height: 1.4;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--font-label);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 16px 44px; background: var(--gold); color: var(--navy);
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost {
+    font-family: var(--font-label);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 16px 44px; background: transparent; color: var(--white);
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.5); cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+  .hero-scroll {
+    position: absolute; bottom: 42px; right: 72px; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0.6;
+  }
+  .hero-scroll span {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .hero-scroll-line {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--white));
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(0.6); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* OFFER BANNER */
+  .offer-banner {
+    background: linear-gradient(90deg, var(--gold) 0%, #B8934A 50%, var(--gold) 100%);
+    padding: 18px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    flex-wrap: wrap;
+  }
+  .offer-banner-text {
+    font-family: var(--font-label);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--navy); text-align: center;
+  }
+  .offer-banner-highlight { font-size: 14px; font-weight: 500; }
+  .offer-sep { width: 4px; height: 4px; background: var(--navy); border-radius: 50%; opacity: 0.4; }
+  .offer-banner-cta {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 9px 24px; border: 1.5px solid var(--navy);
+    color: var(--navy); text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .offer-banner-cta:hover { background: rgba(10,22,40,0.12); }
+
+  /* SECTION GENERIC */
+  section { position: relative; }
+  .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .section-label {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.3em; color: var(--gold);
+    text-transform: uppercase; display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .section-label::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+  }
+
+  /* INTRO / MAYBE */
+  .maybe-section {
+    background: var(--navy);
+    padding: 120px 0 100px;
+  }
+  .maybe-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .maybe-headline {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 300; line-height: 1.1; color: var(--white);
+  }
+  .maybe-headline em { font-style: italic; color: var(--gold); }
+  .maybe-strapline {
+    font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.6);
+    margin-top: 28px;
+  }
+  .maybe-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+  .maybe-item {
+    padding: 32px 28px; background: rgba(10,22,40,0.9);
+    border: 1px solid rgba(201,169,110,0.1);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .maybe-item:hover {
+    border-color: rgba(201,169,110,0.4);
+    background: rgba(17,32,64,0.9);
+  }
+  .maybe-item-icon {
+    width: 32px; height: 32px; margin-bottom: 16px; opacity: 0.6;
+  }
+  .maybe-item-text {
+    font-family: var(--font-display);
+    font-size: 17px; font-style: italic; color: rgba(255,255,255,0.85);
+    line-height: 1.3;
+  }
+
+  /* PROMO CARD */
+  .promo-section {
+    background: var(--ivory);
+    padding: 100px 0;
+  }
+  .promo-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+  }
+  .promo-card {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    min-height: 480px; overflow: hidden;
+  }
+  .promo-card-visual {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #112040 0%, #1a3a5c 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .promo-card-visual-bg {
+    position: absolute; inset: 0;
+    background: url('https://explorajourneys.com/content/dam/explora/b2c/common/homepage/Explora_Journeys_ExploraI.png') center/cover no-repeat;
+    opacity: 0.35;
+  }
+  .promo-badge {
+    position: relative; z-index: 2;
+    text-align: center;
+  }
+  .promo-badge-pct {
+    font-family: var(--font-display);
+    font-size: 120px; font-weight: 300; line-height: 1;
+    color: var(--gold); opacity: 0.9;
+  }
+  .promo-badge-label {
+    font-family: var(--font-label);
+    font-size: 11px; letter-spacing: 0.25em; color: var(--white);
+    text-transform: uppercase; margin-top: -8px;
+  }
+  .promo-card-content {
+    padding: 60px 56px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .promo-card-eyebrow {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.3em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .promo-card-headline {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3.2vw, 48px);
+    font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 20px;
+  }
+  .promo-card-headline em { font-style: italic; color: var(--gold-light); }
+  .promo-card-body {
+    font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.65);
+    margin-bottom: 36px; max-width: 420px;
+  }
+  .promo-conditions {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 40px;
+  }
+  .promo-condition {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: rgba(255,255,255,0.6);
+  }
+  .promo-condition-dot {
+    width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* DESTINATIONS */
+  .destinations-section {
+    background: var(--ivory);
+    padding: 100px 0 120px;
+  }
+  .destinations-header {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 60px;
+  }
+  .destinations-headline {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 300; color: var(--navy); line-height: 1.1;
+  }
+  .destinations-headline em { font-style: italic; color: var(--sea-dark); }
+  .destinations-view-all {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sea-dark); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.2s;
+    flex-shrink: 0; padding-bottom: 4px;
+  }
+  .destinations-view-all:hover { gap: 16px; }
+  .destinations-view-all::after { content: '→'; }
+
+  /* Region tabs */
+  .region-tabs {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+    display: flex; gap: 0; overflow-x: auto; margin-bottom: 0;
+    border-bottom: 1px solid rgba(10,22,40,0.15);
+    scrollbar-width: none;
+  }
+  .region-tabs::-webkit-scrollbar { display: none; }
+  .region-tab {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 14px 24px; cursor: pointer; color: var(--text-mid);
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+    background: none; border-left: none; border-right: none; border-top: none;
+  }
+  .region-tab.active {
+    color: var(--navy); border-bottom-color: var(--gold);
+  }
+  .region-tab:hover { color: var(--navy); }
+
+  .region-panel { display: none; }
+  .region-panel.active { display: block; }
+
+  .cruises-grid {
+    max-width: 1280px; margin: 0 auto; padding: 48px 48px 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .cruise-card {
+    background: var(--white);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .cruise-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(10,22,40,0.15);
+  }
+  .cruise-card-img {
+    position: relative; height: 220px; overflow: hidden;
+  }
+  .cruise-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .cruise-card:hover .cruise-card-img img { transform: scale(1.06); }
+  .cruise-card-ship {
+    position: absolute; top: 16px; left: 16px;
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 5px 12px; background: rgba(10,22,40,0.75);
+    color: var(--gold); backdrop-filter: blur(4px);
+  }
+  .cruise-card-nights {
+    position: absolute; top: 16px; right: 16px;
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 300; color: var(--white); line-height: 1;
+    text-align: center;
+  }
+  .cruise-card-nights small {
+    display: block; font-size: 10px; font-family: var(--font-body);
+    letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8;
+  }
+  .cruise-card-body { padding: 24px 28px 28px; }
+  .cruise-card-route {
+    font-family: var(--font-display);
+    font-size: 19px; font-weight: 400; color: var(--navy);
+    line-height: 1.25; margin-bottom: 10px;
+  }
+  .cruise-card-ports {
+    font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px;
+  }
+  .cruise-card-footer {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding-top: 16px; border-top: 1px solid rgba(10,22,40,0.08);
+  }
+  .cruise-card-price-label {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-mid); margin-bottom: 2px;
+  }
+  .cruise-card-price {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 400; color: var(--navy);
+  }
+  .cruise-card-price sup {
+    font-size: 14px; vertical-align: super; font-weight: 300;
+  }
+  .cruise-card-save {
+    font-size: 11px; font-weight: 500; color: #C5421C;
+    background: rgba(197,66,28,0.08); padding: 4px 10px; border-radius: 2px;
+  }
+  .cruise-card-link {
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--sea-dark); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cruise-card-link::after { content: '→'; transition: transform 0.2s; }
+  .cruise-card:hover .cruise-card-link::after { transform: translateX(4px); }
+
+  /* INCLUSIONS */
+  .inclusions-section {
+    background: var(--navy-mid);
+    padding: 100px 0;
+  }
+  .inclusions-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+  }
+  .inclusions-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 72px;
+    align-items: end;
+  }
+  .inclusions-headline {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300; color: var(--white); line-height: 1.1;
+  }
+  .inclusions-headline em { font-style: italic; color: var(--gold); }
+  .inclusions-desc {
+    font-size: 14px; line-height: 1.9; color: rgba(255,255,255,0.55);
+    padding-top: 12px;
+  }
+  .inclusions-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .inclusion-item {
+    padding: 40px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,169,110,0.08);
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .inclusion-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(201,169,110,0.25);
+  }
+  .inclusion-icon {
+    font-size: 28px; margin-bottom: 20px; opacity: 0.8;
+  }
+  .inclusion-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 400; color: var(--white);
+    margin-bottom: 10px;
+  }
+  .inclusion-detail {
+    font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.45);
+  }
+  .inclusion-gold { color: var(--gold); font-weight: 500; font-size: 14px; }
+
+  /* FLEET */
+  .fleet-section {
+    background: var(--ivory);
+    padding: 100px 0;
+  }
+  .fleet-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+  }
+  .fleet-header { margin-bottom: 60px; }
+  .fleet-headline {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300; color: var(--navy); line-height: 1.1;
+    max-width: 560px;
+  }
+  .fleet-headline em { font-style: italic; color: var(--sea-dark); }
+  .fleet-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px;
+  }
+  .fleet-card {
+    position: relative; height: 340px; overflow: hidden; cursor: pointer;
+  }
+  .fleet-card:first-child {
+    grid-column: span 2; height: 420px;
+  }
+  .fleet-card-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform 0.6s;
+  }
+  .fleet-card:hover .fleet-card-bg { transform: scale(1.04); }
+  .fleet-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.1) 60%);
+  }
+  .fleet-card-content {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 36px;
+  }
+  .fleet-card-label {
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.25em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .fleet-card-name {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 300; color: var(--white);
+  }
+  .fleet-card-stat {
+    font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 6px;
+  }
+  .fleet-badge-new {
+    position: absolute; top: 24px; right: 24px;
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 6px 14px; background: var(--gold); color: var(--navy);
+  }
+
+  /* AWARDS */
+  .awards-strip {
+    background: var(--navy);
+    padding: 48px 0;
+    border-top: 1px solid rgba(201,169,110,0.15);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+  .awards-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    flex-wrap: wrap;
+  }
+  .award-item {
+    text-align: center; flex: 1; min-width: 180px;
+  }
+  .award-name {
+    font-family: var(--font-display);
+    font-size: 16px; font-style: italic; color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .award-label {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .award-sep { width: 1px; height: 48px; background: rgba(201,169,110,0.2); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--navy);
+    padding: 120px 0;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,169,110,0.07) 0%, transparent 65%);
+  }
+  .cta-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; padding: 0 48px; }
+  .cta-headline {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 20px;
+  }
+  .cta-headline em { font-style: italic; color: var(--gold); }
+  .cta-body {
+    font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 48px;
+  }
+  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .cta-tel {
+    font-family: var(--font-display);
+    font-size: 20px; color: var(--gold); text-decoration: none; font-style: italic;
+    display: block; margin-top: 32px; opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .cta-tel:hover { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    background: #070F1C;
+    padding: 72px 0 48px;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 48px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+  }
+  .footer-brand { }
+  .footer-brand-logo {
+    font-family: var(--font-label);
+    font-size: 14px; letter-spacing: 0.2em; color: var(--white); margin-bottom: 6px;
+  }
+  .footer-brand-sub {
+    font-family: var(--font-label);
+    font-size: 9px; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 20px;
+  }
+  .footer-brand-desc {
+    font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.4); max-width: 300px;
+  }
+  .footer-col-title {
+    font-family: var(--font-label);
+    font-size: 10px; letter-spacing: 0.2em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a {
+    font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+  .footer-bottom {
+    max-width: 1280px; margin: 60px auto 0; padding: 24px 48px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-copy {
+    font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.05em;
+  }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a {
+    font-size: 11px; color: rgba(255,255,255,0.25); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* Gold divider */
+  .gold-divider {
+    width: 48px; height: 1px; background: var(--gold); margin: 0 auto 32px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 32px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 32px 64px; }
+    .maybe-inner { grid-template-columns: 1fr; gap: 48px; }
+    .promo-card { grid-template-columns: 1fr; }
+    .promo-card-visual { min-height: 260px; }
+    .cruises-grid { grid-template-columns: repeat(2, 1fr); }
+    .inclusions-header { grid-template-columns: 1fr; gap: 24px; }
+    .inclusions-grid { grid-template-columns: repeat(2, 1fr); }
+    .fleet-grid { grid-template-columns: 1fr; }
+    .fleet-card:first-child { grid-column: span 1; height: 340px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .section-inner, .inclusions-inner, .fleet-inner, .promo-inner,
+    .maybe-inner, .destinations-header, .region-tabs, .cruises-grid,
+    .awards-inner, .footer-inner, .footer-bottom { padding-left: 32px; padding-right: 32px; }
+  }
+  @media (max-width: 640px) {
+    .hero-content { padding: 0 24px 56px; }
+    .hero-scroll { display: none; }
+    .cruises-grid { grid-template-columns: 1fr; padding: 32px 24px 0; }
+    .inclusions-grid { grid-template-columns: 1fr; }
+    .region-tabs { padding: 0 24px; }
+    .destinations-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .offer-banner { flex-direction: column; gap: 12px; padding: 16px 24px; }
+    .offer-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <!-- Mandala-inspired SVG logo -->
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="19" stroke="#C9A96E" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="13" stroke="#C9A96E" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <circle cx="20" cy="20" r="7" stroke="#C9A96E" stroke-width="0.8"/>
+      <circle cx="20" cy="20" r="2" fill="#C9A96E"/>
+      <line x1="20" y1="1" x2="20" y2="8" stroke="#C9A96E" stroke-width="0.8"/>
+      <line x1="20" y1="32" x2="20" y2="39" stroke="#C9A96E" stroke-width="0.8"/>
+      <line x1="1" y1="20" x2="8" y2="20" stroke="#C9A96E" stroke-width="0.8"/>
+      <line x1="32" y1="20" x2="39" y2="20" stroke="#C9A96E" stroke-width="0.8"/>
+      <line x1="6.4" y1="6.4" x2="11.4" y2="11.4" stroke="#C9A96E" stroke-width="0.5"/>
+      <line x1="28.6" y1="28.6" x2="33.6" y2="33.6" stroke="#C9A96E" stroke-width="0.5"/>
+      <line x1="33.6" y1="6.4" x2="28.6" y2="11.4" stroke="#C9A96E" stroke-width="0.5"/>
+      <line x1="11.4" y1="28.6" x2="6.4" y2="33.6" stroke="#C9A96E" stroke-width="0.5"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span>EXPLORA JOURNEYS</span>
+      <span>OCEAN STATE OF MIND</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Круизы</a></li>
+    <li><a href="#inclusions">Включено</a></li>
+    <li><a href="#fleet">Флот</a></li>
+    <li><a href="#promo">Спецпредложения</a></li>
+  </ul>
+  <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="nav-cta">Забронировать</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="./EJ_HP_Video_D_2.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ocean State of Mind</div>
+    <h1 class="hero-headline">
+      Роскошь<br>без <em>берегов</em>
+    </h1>
+    <p class="hero-sub">Всё включено. Девять ресторанов. Каждый рассвет — над другим горизонтом.</p>
+    <div class="hero-actions">
+      <a href="#destinations" class="btn-primary">Выбрать круиз</a>
+      <a href="#promo" class="btn-ghost">Спецпредложения</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- OFFER BANNER -->
+<div class="offer-banner" id="promo">
+  <div class="offer-banner-text">
+    <div class="offer-banner-highlight">Exclusive Summer Sale — до 35% скидки</div>
+  </div>
+  <div class="offer-sep"></div>
+  <div class="offer-banner-text">Бронирование до 7 июля 2026 · Депозит от 10%</div>
+  <div class="offer-sep"></div>
+  <a href="https://lavoyage.ru/sea_cruise/actions/action_details/?action_id=8246" target="_blank" class="offer-banner-cta">Подробнее об акции</a>
+</div>
+
+<!-- MAYBE SECTION -->
+<section class="maybe-section">
+  <div class="maybe-inner">
+    <div>
+      <div class="section-label">Философия бренда</div>
+      <h2 class="maybe-headline">
+        Может быть,<br>
+        роскошь не<br>
+        <em>следует правилам</em>
+      </h2>
+      <p class="maybe-strapline">
+        Explora Journeys приглашает вас открыть новый способ путешествовать —
+        где время принадлежит вам, а каждая точка маршрута — уникальный опыт.
+        Не круиз. Путешествие.
+      </p>
+    </div>
+    <div class="maybe-grid">
+      <div class="maybe-item">
+        <div class="maybe-item-text">Может быть, лучший отель не нуждается в адресе</div>
+      </div>
+      <div class="maybe-item">
+        <div class="maybe-item-text">Может быть, самый изысканный ужин — на закате над океаном</div>
+      </div>
+      <div class="maybe-item">
+        <div class="maybe-item-text">Может быть, один check-in открывает целый мир</div>
+      </div>
+      <div class="maybe-item">
+        <div class="maybe-item-text">Может быть, лучшая крыша-бар — над самим океаном</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO CARD -->
+<section class="promo-section">
+  <div class="promo-inner">
+    <div class="section-label" style="color: var(--sea-dark);">
+      <span style="background: var(--sea-dark); width:28px; height:1px; display:block;"></span>
+      Актуальное предложение
+    </div>
+    <div class="promo-card">
+      <div class="promo-card-visual">
+        <div class="promo-card-visual-bg"></div>
+        <div class="promo-badge">
+          <div class="promo-badge-pct">35%</div>
+          <div class="promo-badge-label">Экономия на суите</div>
+        </div>
+      </div>
+      <div class="promo-card-content">
+        <div class="promo-card-eyebrow">Летняя акция · Summer Sale 2026</div>
+        <h3 class="promo-card-headline">
+          Раннее бронирование —<br><em>максимальная выгода</em>
+        </h3>
+        <p class="promo-card-body">
+          Забронируйте круиз Explora Journeys до 7 июля 2026 года и получите
+          скидку до 35% на стоимость сюита. На выбранные категории Ocean Terrace Suite —
+          дополнительная экономия $4 000 на сюит. Депозит всего 10%.
+        </p>
+        <div class="promo-conditions">
+          <div class="promo-condition">
+            <div class="promo-condition-dot"></div>
+            <span>Скидка до 35% на сюиты</span>
+          </div>
+          <div class="promo-condition">
+            <div class="promo-condition-dot"></div>
+            <span>Депозит от 10%</span>
+          </div>
+          <div class="promo-condition">
+            <div class="promo-condition-dot"></div>
+            <span>Маршруты 2026–2027</span>
+          </div>
+          <div class="promo-condition">
+            <div class="promo-condition-dot"></div>
+            <span>Все включено</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="https://lavoyage.ru/sea_cruise/actions/action_details/?action_id=8246" target="_blank" class="btn-primary" style="padding: 14px 36px;">Узнать условия акции</a>
+          <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="btn-ghost" style="padding: 14px 36px; color: var(--white); border-color: rgba(255,255,255,0.35);">Все круизы</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="destinations-section" id="destinations">
+  <div class="destinations-header">
+    <div>
+      <div class="section-label" style="color: var(--sea-dark);">
+        <span style="background: var(--sea-dark); width:28px; height:1px; display:block;"></span>
+        Направления
+      </div>
+      <h2 class="destinations-headline">
+        Маршруты,<br>которые <em>помнят</em>
+      </h2>
+    </div>
+    <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="destinations-view-all">Все круизы Explora</a>
+  </div>
+
+  <!-- TABS -->
+  <div class="region-tabs" role="tablist">
+    <button class="region-tab active" data-region="med" role="tab">Средиземноморье</button>
+    <button class="region-tab" data-region="carib" role="tab">Карибский бассейн</button>
+    <button class="region-tab" data-region="north" role="tab">Северная Европа</button>
+    <button class="region-tab" data-region="grand" role="tab">Большие маршруты</button>
+    <button class="region-tab" data-region="other" role="tab">Другие регионы</button>
+  </div>
+
+  <!-- MEDITERRANEAN -->
+  <div class="region-panel active" id="panel-med">
+    <div class="cruises-grid">
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80" alt="Средиземноморье" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">7<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Рим → Афины → Санторини → Дубровник</div>
+          <div class="cruise-card-ports">Чивитавеккья · Неаполь · Санторини · Котор · Дубровник · Афины</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>4 890</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 35%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80" alt="Монако Лазурный берег" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA II</div>
+          <div class="cruise-card-nights">10<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Барселона → Монако → Портофино → Амальфи</div>
+          <div class="cruise-card-ports">Барселона · Марсель · Ницца · Монако · Портофино · Амальфи · Палермо</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>6 200</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 30%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1555993539-1732b0258235?w=600&q=80" alt="Греческие острова" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">12<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Афины → Греческие острова → Стамбул</div>
+          <div class="cruise-card-ports">Афины · Санторини · Родос · Кушадасы · Мармарис · Бодрум · Стамбул</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>7 400</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 25%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARIBBEAN -->
+  <div class="region-panel" id="panel-carib">
+    <div class="cruises-grid">
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=80" alt="Карибы" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">7<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Майами → Сен-Бартелеми → Виргинские острова</div>
+          <div class="cruise-card-ports">Майами · Нассау · Сен-Бартелеми · Тортола · Сент-Томас · Майами</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>4 500</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 35%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Антильские острова" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA II</div>
+          <div class="cruise-card-nights">10<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Сан-Хуан → Гваделупа → Мартиника → Барбадос</div>
+          <div class="cruise-card-ports">Сан-Хуан · Доминика · Гваделупа · Мартиника · Сент-Люсия · Барбадос</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>5 800</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 30%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=600&q=80" alt="Карибские острова" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA III</div>
+          <div class="cruise-card-nights">14<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Майами → Карибы → Панамский канал</div>
+          <div class="cruise-card-ports">Майами · Кайман · Картахена · Панамский канал · Коста-Рика · Мексика</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>8 900</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 25%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NORTHERN EUROPE -->
+  <div class="region-panel" id="panel-north">
+    <div class="cruises-grid">
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Норвегия фьорды" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA II</div>
+          <div class="cruise-card-nights">10<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Копенгаген → Норвежские фьорды → Берген</div>
+          <div class="cruise-card-ports">Копенгаген · Осло · Флом · Гейрангерфьорд · Лофотены · Берген</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>7 200</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 30%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Исландия" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA III</div>
+          <div class="cruise-card-nights">12<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Рейкьявик → Исландия → Гренландия</div>
+          <div class="cruise-card-ports">Рейкьявик · Вестманнаэйяр · Акюрейри · Гренландия · Шпицберген</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>8 500</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 25%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&q=80" alt="Балтика" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">14<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Балтийские столицы: Хельсинки → Стокгольм → Таллин</div>
+          <div class="cruise-card-ports">Варнемюнде · Гданьск · Клайпеда · Рига · Таллин · Хельсинки · Стокгольм</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>9 100</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 20%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAND JOURNEYS -->
+  <div class="region-panel" id="panel-grand">
+    <div class="cruises-grid">
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80" alt="Трансатлантика" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">32<small>ночи</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Большая Трансатлантическая одиссея: Майами → Лиссабон</div>
+          <div class="cruise-card-ports">Майами · Пуэрто-Рико · Антигуа · Мартиника · Азорские о-ва · Мадейра · Лиссабон</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>12 000</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 35%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Южная Америка" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA II</div>
+          <div class="cruise-card-nights">21<small>ночь</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Южная Америка и Амазонка: Лима → Рио</div>
+          <div class="cruise-card-ports">Каллао · Эквадор · Колон · Картахена · Манаус · Форталеза · Рио-де-Жанейро</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>15 200</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 25%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=600&q=80" alt="Мировое путешествие" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA I</div>
+          <div class="cruise-card-nights">128<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Endless Worlds — Кругосветное путешествие 2029</div>
+          <div class="cruise-card-ports">Дубай · Сингапур · Токио · Сидней · Нью-Йорк · Барселона · 63 порта · 29 стран</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>68 000</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">Inaugural</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER -->
+  <div class="region-panel" id="panel-other">
+    <div class="cruises-grid">
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=80" alt="Азия" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA III</div>
+          <div class="cruise-card-nights">14<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Азия: Сингапур → Гонконг → Токио</div>
+          <div class="cruise-card-ports">Сингапур · Бангкок · Вьетнам · Гонконг · Шанхай · Токио</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>9 800</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">Сезон 2027</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&q=80" alt="ОАЭ Красное море" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA II</div>
+          <div class="cruise-card-nights">10<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Красное море и Аравийский полуостров</div>
+          <div class="cruise-card-ports">Дубай · Абу-Даби · Маскат · Джибути · Аден · Джедда</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>6 400</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">−до 25%</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cruise-card">
+        <div class="cruise-card-img">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Аляска" loading="lazy">
+          <div class="cruise-card-ship">EXPLORA III</div>
+          <div class="cruise-card-nights">12<small>ночей</small></div>
+        </div>
+        <div class="cruise-card-body">
+          <div class="cruise-card-route">Аляска: Ванкувер → фьорды → Сеатл</div>
+          <div class="cruise-card-ports">Ванкувер · Ситка · Джуно · Принц-Руперт · Залив Энрикот · Сеатл</div>
+          <div class="cruise-card-footer">
+            <div>
+              <div class="cruise-card-price-label">от, за чел.</div>
+              <div class="cruise-card-price"><sup>$</sup>8 200</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div class="cruise-card-save">Сезон 2027</div>
+              <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="cruise-card-link">Смотреть</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUSIONS -->
+<section class="inclusions-section" id="inclusions">
+  <div class="inclusions-inner">
+    <div class="inclusions-header">
+      <div>
+        <div class="section-label">Всё включено</div>
+        <h2 class="inclusions-headline">
+          Один тариф —<br><em>безграничный</em> опыт
+        </h2>
+      </div>
+      <p class="inclusions-desc">
+        В Explora Journeys «всё включено» — не маркетинговый термин. Это философия.
+        Девять ресторанов, неограниченные премиальные напитки, спа-центр Ocean Wellness,
+        Wi-Fi и сервисные сборы входят в стоимость каждого сюита.
+        Вы просто путешествуете.
+      </p>
+    </div>
+    <div class="inclusions-grid">
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🍽</div>
+        <div class="inclusion-title">9 ресторанов</div>
+        <div class="inclusion-detail">От паназиатской кухни до стейкхауса и гастрономических ужинов с мишленовскими шеф-поварами</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🍾</div>
+        <div class="inclusion-title">Напитки без лимита</div>
+        <div class="inclusion-detail">Неограниченные премиальные вина, крепкие спиртные напитки, шампанское и коктейли весь день</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🌊</div>
+        <div class="inclusion-title">Ocean Wellness</div>
+        <div class="inclusion-detail">Полный доступ в спа-центр, бассейны, занятия йогой, фитнес-зал и персональные оздоровительные программы</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">📶</div>
+        <div class="inclusion-title">Безлимитный Wi-Fi</div>
+        <div class="inclusion-detail">Высокоскоростной интернет включён на всём маршруте — оставайтесь на связи или отдыхайте от неё</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🛎</div>
+        <div class="inclusion-title">Батлер-сервис</div>
+        <div class="inclusion-detail">Персональный консьерж для каждого сюита, готовый исполнить любое желание в любое время</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">✈</div>
+        <div class="inclusion-title">Трансферы</div>
+        <div class="inclusion-detail">Частные трансферы аэропорт–судно в выбранных портах входят в пакет</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🎭</div>
+        <div class="inclusion-title">Развлечения</div>
+        <div class="inclusion-detail">Концерты, мастер-классы, лекции и культурные вечера с выдающимися гостями на борту</div>
+      </div>
+      <div class="inclusion-item">
+        <div class="inclusion-icon">🍋</div>
+        <div class="inclusion-title">Приветственное шампанское</div>
+        <div class="inclusion-detail">Бутылка шампанского и набор приветственных угощений в каждом сюите при посадке</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="fleet-section" id="fleet">
+  <div class="fleet-inner">
+    <div class="fleet-header">
+      <div class="section-label" style="color: var(--sea-dark);">
+        <span style="background: var(--sea-dark); width:28px; height:1px; display:block;"></span>
+        Флот
+      </div>
+      <h2 class="fleet-headline">
+        Три флагмана.<br>Один <em>стиль.</em>
+      </h2>
+    </div>
+    <div class="fleet-grid">
+      <!-- EXPLORA I - spanning full width -->
+      <div class="fleet-card">
+        <div class="fleet-card-bg" style="background-image: url('https://explorajourneys.com/content/dam/explora/b2c/common/homepage/Explora_Journeys_ExploraI.png'); background-color: #1a3a5c;"></div>
+        <div class="fleet-card-overlay"></div>
+        <div class="fleet-card-content">
+          <div class="fleet-card-label">Флагманский лайнер</div>
+          <div class="fleet-card-name">EXPLORA I</div>
+          <div class="fleet-card-stat">461 сюит · 922 гостя · Запущен в 2023 · Средиземноморье & Карибы</div>
+        </div>
+      </div>
+      <!-- EXPLORA II -->
+      <div class="fleet-card">
+        <div class="fleet-card-bg" style="background: linear-gradient(135deg, #0d2845 0%, #1e4d7b 100%);"></div>
+        <div class="fleet-card-overlay"></div>
+        <div class="fleet-card-content">
+          <div class="fleet-card-label">Второй флагман</div>
+          <div class="fleet-card-name">EXPLORA II</div>
+          <div class="fleet-card-stat">461 сюит · 922 гостя · Запущен в 2024 · Средиземноморье</div>
+        </div>
+      </div>
+      <!-- EXPLORA III -->
+      <div class="fleet-card">
+        <div class="fleet-card-bg" style="background: linear-gradient(135deg, #16384e 0%, #2a6888 100%);"></div>
+        <div class="fleet-card-overlay"></div>
+        <div class="fleet-card-content">
+          <div class="fleet-card-label">Новейший флагман</div>
+          <div class="fleet-card-name">EXPLORA III</div>
+          <div class="fleet-card-stat">461 сюит · 922 гостя · Дебют 2026 · Северная Европа & Карибы</div>
+        </div>
+        <div class="fleet-badge-new">New</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<div class="awards-strip">
+  <div class="awards-inner">
+    <div class="award-item">
+      <div class="award-name">Best New Cruise Line</div>
+      <div class="award-label">Condé Nast Traveler · 2024</div>
+    </div>
+    <div class="award-sep"></div>
+    <div class="award-item">
+      <div class="award-name">World's Best Luxury Cruise</div>
+      <div class="award-label">Travel + Leisure · 2024</div>
+    </div>
+    <div class="award-sep"></div>
+    <div class="award-item">
+      <div class="award-name">Editor's Choice Award</div>
+      <div class="award-label">Cruise Critic · 2024</div>
+    </div>
+    <div class="award-sep"></div>
+    <div class="award-item">
+      <div class="award-name">Лучший круизный бренд</div>
+      <div class="award-label">Forbes Russia · 2024</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content: center; margin-bottom: 20px;">
+      <span></span>Ваше путешествие начинается здесь
+    </div>
+    <div class="gold-divider"></div>
+    <h2 class="cta-headline">
+      Готовы выйти<br>в <em>открытый океан?</em>
+    </h2>
+    <p class="cta-body">
+      Наши специалисты помогут подобрать идеальный маршрут,
+      подходящую категорию сюита и оптимальные даты.
+      Скидки до 35% действуют при раннем бронировании.
+    </p>
+    <div class="cta-actions">
+      <a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank" class="btn-primary">Выбрать круиз</a>
+      <a href="https://lavoyage.ru/sea_cruise/actions/action_details/?action_id=8246" target="_blank" class="btn-ghost">Акции и спецпредложения</a>
+    </div>
+    <a href="tel:+78001234567" class="cta-tel">+7 (800) 123-45-67 — бесплатно, 24/7</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-logo">EXPLORA JOURNEYS</div>
+      <div class="footer-brand-sub">Ocean State of Mind</div>
+      <p class="footer-brand-desc">
+        Роскошный круизный бренд MSC Group. Флот из 3 лайнеров, более 100 маршрутов,
+        63 страны. Предлагается через La Voyage — официального партнёра в России.
+      </p>
+    </div>
+    <div>
+      <div class="footer-col-title">Направления</div>
+      <ul class="footer-links">
+        <li><a href="#">Средиземноморье</a></li>
+        <li><a href="#">Карибский бассейн</a></li>
+        <li><a href="#">Северная Европа</a></li>
+        <li><a href="#">Азия</a></li>
+        <li><a href="#">Аляска</a></li>
+        <li><a href="#">Кругосветные</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">На борту</div>
+      <ul class="footer-links">
+        <li><a href="#">9 ресторанов</a></li>
+        <li><a href="#">Ocean Wellness</a></li>
+        <li><a href="#">Сюиты</a></li>
+        <li><a href="#">Развлечения</a></li>
+        <li><a href="#">Экскурсии</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Бронирование</div>
+      <ul class="footer-links">
+        <li><a href="https://lavoyage.ru/sea_cruise/cruises/?company=T1&price-min=1000&price-max=999999999" target="_blank">Все круизы</a></li>
+        <li><a href="https://lavoyage.ru/sea_cruise/actions/action_details/?action_id=8246" target="_blank">Акции</a></li>
+        <li><a href="#">Контакты</a></li>
+        <li><a href="#">О La Voyage</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 La Voyage · Официальный партнёр Explora Journeys · Все цены указаны «от» и являются ориентировочными</div>
+    <div class="footer-legal">
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Условия бронирования</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Region tabs
+  document.querySelectorAll('.region-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const region = tab.dataset.region;
+      document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.region-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById('panel-' + region);
+      if (panel) panel.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.cruise-card, .inclusion-item, .fleet-card, .maybe-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
